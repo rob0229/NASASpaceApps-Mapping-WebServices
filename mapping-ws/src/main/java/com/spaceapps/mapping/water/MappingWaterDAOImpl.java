@@ -68,16 +68,7 @@ public class MappingWaterDAOImpl implements MappingWaterDAO{
 	public int modifyDataPoint(int userID, int dp_id, String category) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		//new entry in history and sample table
-		String query = "INSERT INTO SAMPLE_INFO(ph) VALUES('0')";
-		
-		try{
-			stmt = con.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-			s_id = stmt.executeUpdate();
-		}catch(Exception e){
-			System.out.println(e);
-		}
-		
-		query ="INSERT INTO SAMPLE_INFO(ph) VALUES ('0')";
+		String query ="INSERT INTO SAMPLE_INFO(ph) VALUES ('0')";
 		try{
 			stmt = con.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 			stmt.executeUpdate();
