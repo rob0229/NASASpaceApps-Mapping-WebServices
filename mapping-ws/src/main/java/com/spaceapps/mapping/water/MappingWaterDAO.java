@@ -1,5 +1,9 @@
 package com.spaceapps.mapping.water;
 
+import java.util.List;
+
+import com.spaceapps.mapping.object.DataPoint;
+
 public interface MappingWaterDAO {
 	public int addDataPoint(int userId, double latitude, double longitude, String category); 
 
@@ -7,6 +11,6 @@ public interface MappingWaterDAO {
 
 	public void recentUserDataPoints(int userID);
 
-	public void retrieveDataPoints(double maxlatitude, double minlatitude, double maxlongitude,
+	public List<DataPoint> retrieveDataPoints(double maxlatitude, double minlatitude, double maxlongitude,
 			double minlongitude);
 }

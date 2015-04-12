@@ -1,9 +1,14 @@
 package com.spaceapps.mapping.water;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.spaceapps.mapping.object.DataPoint;
 
 @RestController
 public class MappingWaterController {
@@ -49,18 +54,18 @@ public class MappingWaterController {
 	}
 
 	@RequestMapping("/mapping/water/retrieveDataPoints")
-	public String retrieveDataPoints(
+	public List<DataPoint> retrieveDataPoints(
 			@RequestParam(value = "maxlatitude") double maxlatitude,
 			@RequestParam(value = "minlatitude") double minlatitude,
 			@RequestParam(value = "maxlongitude") double maxlongitude,
 			@RequestParam(value = "minlongitude") double minlongitude) {
-
+		List<DataPoint> list = null;
 		try {
-			new MappingWaterDAOImpl().retrieveDataPoints(maxlatitude, minlatitude, maxlongitude,
+			list = new MappingWaterDAOImpl().retrieveDataPoints(maxlatitude, minlatitude, maxlongitude,
 					 minlongitude);
 		} catch (Exception e) {
-			return "Failure";
+			e.printStackTrace();
 		}
-		return "Success";
+		return list;
 	}
 }
