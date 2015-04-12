@@ -83,12 +83,7 @@ public class MappingWaterDAOImpl implements MappingWaterDAO {
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-<<<<<<< HEAD
-		
-		
-=======
 
->>>>>>> 58074e38feede9135de5358033191701c6a6d38a
 		return s_id;
 	}
 
