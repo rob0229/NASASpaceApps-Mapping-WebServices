@@ -7,6 +7,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class WaterMain {
 
 	public static void main(String[] args) {
+		//config
+		
 		SpringApplication.run(WaterMain.class, args);
 	}
 }
