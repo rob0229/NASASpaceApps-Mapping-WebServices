@@ -7,24 +7,16 @@ public class DataPoint {
 	private double longitude;
 	private String discDate;	
 	private String category;
+	private String purpose;
 	private int dataPointID;
 
-	public DataPoint(int dp_id, double lat, double lon, String disc, String category ) {
+	public DataPoint(int dp_id, double lat, double lon, String disc, String category, String purpose ) {
 		this.latitude = lat;
 		this.longitude = lon;
 		this.category = category;
+		this.purpose = purpose;
 		this.discDate = disc;
 		this.dataPointID = dp_id;
-	}
-
-	public DataPoint(String nString) {
-		this.discDate = nString;
-	}
-
-	public DataPoint(int dp_id, String nString, String nString2) {
-		this.dataPointID = dp_id;
-		this.discDate = nString;
-		this.category = nString2;
 	}
 
 	public double getLatitude() {
@@ -58,6 +50,14 @@ public class DataPoint {
 
 	public void setCategory(String category) {
 		this.category = category;
+	}
+	
+	public String getpurpose() {
+		return purpose;
+	}
+
+	public void setpurpose(String purpose) {
+		this.purpose = purpose;
 	}
 
 	public int getDataPointID() {

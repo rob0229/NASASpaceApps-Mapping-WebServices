@@ -1,9 +1,6 @@
 package com.spaceapps.mapping.water;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
-
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -45,11 +42,12 @@ public class MappingWaterController {
 	public int addDataPoint(@RequestParam(value = "userID") int userID,
 			@RequestParam(value = "latitude") double latitude,
 			@RequestParam(value = "longitude") double longitude,
-			@RequestParam(value = "category") String category) {
+			@RequestParam(value = "category") String category,
+			@RequestParam(value = "purpose") String purpose) {
 		int result = 0;
 		try {
 			result = new MappingWaterDAOImpl().addDataPoint(userID, latitude,
-					longitude, category);
+					longitude, category, purpose);
 		} catch (Exception e) {
 
 		}
@@ -59,11 +57,12 @@ public class MappingWaterController {
 	@RequestMapping("/mapping/water/modifyDataPoint")
 	public int modifyDataPoint(@RequestParam(value = "userID") int userID,
 			@RequestParam(value = "dpid") int dp_id,
-			@RequestParam(value = "category") String category) {
+			@RequestParam(value = "category") String category,
+			@RequestParam(value = "purpose") String purpose) {
 		int s_id = 0;
 		try {
 			s_id = new MappingWaterDAOImpl().modifyDataPoint(userID, dp_id,
-					category);
+					category, purpose);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -10,9 +10,9 @@ public interface MappingWaterDAO {
 	
 	public String login(String userName, String password);
 	
-	public int addDataPoint(int userId, double latitude, double longitude, String category); 
+	public int addDataPoint(int userId, double latitude, double longitude, String category, String purpose); 
 
-	public int modifyDataPoint(int userID, int dp_id, String category); 
+	public int modifyDataPoint(int userID, int dp_id, String category, String purpose); 
 
 	public List<DataPoint> userDataPoints(int userID);
 
