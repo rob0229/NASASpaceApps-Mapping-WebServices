@@ -23,11 +23,11 @@ public class MappingWaterDAOImpl implements MappingWaterDAO{
 		
 	}
 	
-	public int addDataPoint(int userId, double latitude, double longitude, String category) {
+	public int addDataPoint(int userId, double latitude, double longitude, String category, String purpose) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		
 		
-		String query ="INSERT INTO DATAPOINT(latitude, longitude, discovery_date, user_id) VALUES ('"+ latitude+"', '"+longitude+"', '"+ sdf.format(new Date()).toString()+ "', '" + userId+"')";
+		String query ="INSERT INTO DATAPOINT(latitude, longitude, discovery_date, purpose, user_id) VALUES ('"+ latitude+"', '"+longitude+"', '"+ sdf.format(new Date()).toString()+ "', '" + purpose+"', '" + userId+"')";
 		try{
 			stmt = con.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 			stmt.executeUpdate();
@@ -53,7 +53,7 @@ public class MappingWaterDAOImpl implements MappingWaterDAO{
 		}
 		
 		
-		query ="INSERT INTO HISTORY(monitor_date, category, s_id, user_id, dp_id) VALUES ('"+ sdf.format(new Date()).toString()+"', '"+category+"', '"+ s_id+ "', '" + userId+"', '" + dp_id+"')";
+		query ="INSERT INTO HISTORY(monitor_date, category, purpose, s_id, user_id, dp_id) VALUES ('"+ sdf.format(new Date()).toString()+"', '"+category+"', '"+purpose+"', '"+ s_id+ "', '" + userId+"', '" + dp_id+"')";
 		try{
 			stmt = con.getConnection().prepareStatement(query);
 			stmt.executeUpdate();
@@ -65,7 +65,7 @@ public class MappingWaterDAOImpl implements MappingWaterDAO{
 		return s_id;
 	}
 
-	public int modifyDataPoint(int userID, int dp_id, String category) {
+	public int modifyDataPoint(int userID, int dp_id, String category, String purpose) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		//new entry in history and sample table
 		String query ="INSERT INTO SAMPLE_INFO(ph) VALUES ('0')";
@@ -80,7 +80,7 @@ public class MappingWaterDAOImpl implements MappingWaterDAO{
 			System.out.println(e);
 		}
 		
-		query="INSERT INTO HISTORY(monitor_date, category, s_id, user_id, dp_id) VALUES('"+sdf.format(new Date()).toString()+"', '"+ category +"', '"+s_id+"', '"+userID+"', '"+dp_id+"')";
+		query="INSERT INTO HISTORY(monitor_date, category, purpose, s_id, user_id, dp_id) VALUES('"+sdf.format(new Date()).toString()+"', '"+ category +"', '"+purpose+"', '"+s_id+"', '"+userID+"', '"+dp_id+"')";
 		try{
 			stmt = con.getConnection().prepareStatement(query);
 			stmt.executeUpdate();
@@ -98,7 +98,7 @@ public class MappingWaterDAOImpl implements MappingWaterDAO{
 			stmt = con.getConnection().prepareStatement(query);
 			rs = stmt.executeQuery();
 			while(rs.next()){
-				DataPoint dp = new DataPoint(rs.getInt("dp_id"), rs.getDouble("latitude"), rs.getDouble("longitude"), rs.getNString("discovery_date"), rs.getNString("category"));
+				DataPoint dp = new DataPoint(rs.getInt("dp_id"), rs.getDouble("latitude"), rs.getDouble("longitude"), rs.getNString("discovery_date"), rs.getNString("category"), rs.getNString("purpose"));
 				list.add(dp);
 		}
 		}catch(Exception e){
@@ -115,7 +115,7 @@ public class MappingWaterDAOImpl implements MappingWaterDAO{
 		stmt = con.getConnection().prepareStatement(query);
 		rs = stmt.executeQuery();
 		while(rs.next()){
-			DataPoint dp = new DataPoint(rs.getInt("dp_id"), rs.getDouble("latitude"), rs.getDouble("longitude"), rs.getNString("discovery_date"), rs.getNString("category"));
+			DataPoint dp = new DataPoint(rs.getInt("dp_id"), rs.getDouble("latitude"), rs.getDouble("longitude"), rs.getNString("discovery_date"), rs.getNString("category"), rs.getNString("purpose"));
 			list.add(dp);
 		}
 		}catch(Exception e){

@@ -5,9 +5,9 @@ import java.util.List;
 import com.spaceapps.mapping.object.DataPoint;
 
 public interface MappingWaterDAO {
-	public int addDataPoint(int userId, double latitude, double longitude, String category); 
+	public int addDataPoint(int userId, double latitude, double longitude, String category, String purpose); 
 
-	public int modifyDataPoint(int userID, int dp_id, String category); 
+	public int modifyDataPoint(int userID, int dp_id, String category, String purpose); 
 
 	public List<DataPoint> userDataPoints(int userID);
 
