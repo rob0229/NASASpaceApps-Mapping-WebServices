@@ -1,15 +1,15 @@
 package com.spaceapps.mapping.object;
 
-import java.util.Date;
+
 
 public class DataPoint {
-	private String latitude;
-	private String longitude;
+	private double latitude;
+	private double longitude;
 	private String discDate;	
 	private String category;
-	private String dataPointID;
+	private int dataPointID;
 
-	public DataPoint(String dp_id, String lat, String lon, String disc, String category ) {
+	public DataPoint(int dp_id, double lat, double lon, String disc, String category ) {
 		this.latitude = lat;
 		this.longitude = lon;
 		this.category = category;
@@ -21,25 +21,25 @@ public class DataPoint {
 		this.discDate = nString;
 	}
 
-	public DataPoint(String dp_id, String nString, String nString2) {
+	public DataPoint(int dp_id, String nString, String nString2) {
 		this.dataPointID = dp_id;
 		this.discDate = nString;
 		this.category = nString2;
 	}
 
-	public String getLatitude() {
+	public double getLatitude() {
 		return latitude;
 	}
 
-	public void setLatitude(String latitude) {
+	public void setLatitude(double latitude) {
 		this.latitude = latitude;
 	}
 
-	public String getLongitude() {
+	public double getLongitude() {
 		return longitude;
 	}
 
-	public void setLongitude(String longitude) {
+	public void setLongitude(double longitude) {
 		this.longitude = longitude;
 	}
 
@@ -60,11 +60,11 @@ public class DataPoint {
 		this.category = category;
 	}
 
-	public String getDataPointID() {
+	public int getDataPointID() {
 		return dataPointID;
 	}
 
-	public void setDataPointID(String dataPointID) {
+	public void setDataPointID(int dataPointID) {
 		this.dataPointID = dataPointID;
 	}
 

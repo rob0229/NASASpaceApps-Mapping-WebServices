@@ -82,8 +82,7 @@ public class MappingWaterDAOImpl implements MappingWaterDAO{
 		stmt = con.getConnection().prepareStatement(query);
 		rs = stmt.executeQuery();
 		while(rs.next()){
-			//DataPoint dp = new DataPoint(rs.getNString("dp_id"), rs.getNString("latitude"), rs.getNString("longitude"), rs.getNString("discovery_date"), rs.getNString("category"));
-			DataPoint dp = new DataPoint(rs.getNString("dp_id"), rs.getNString("discovery_date"), rs.getNString("category"));
+			DataPoint dp = new DataPoint(rs.getInt("dp_id"), rs.getDouble("latitude"), rs.getDouble("longitude"), rs.getNString("discovery_date"), rs.getNString("category"));
 			list.add(dp);
 		}
 		}catch(Exception e){
