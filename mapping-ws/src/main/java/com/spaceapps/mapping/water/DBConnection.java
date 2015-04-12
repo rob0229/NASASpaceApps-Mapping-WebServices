@@ -4,24 +4,31 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class DBConnection {
-	private String host;
-	private String username = "root";
-	private String password = "";
-	private Connection con;
+
+	private static Connection con;
+	private static DBConnection instance = null;
 	
-	DBConnection( String host, String username, String password){
-		this.host = host;
-		this.username = username;
-		this.password = password;
-		
+	//private constructor
+	private DBConnection(String host, String username, String password){
 		try{
-			con = DriverManager.getConnection(host, username, password);
+			this.con = DriverManager.getConnection(host, username, password);
 		}catch(Exception e){
 			System.out.println("Result is: "+ e);
 		}
 	}
 	
-	public Connection getConnection(){
+	//public getter
+	public static DBConnection getInstance(String host, String username, String password){
+		if(instance == null){
+			instance = new DBConnection(host, username, password);
+			return instance;
+		}
+		else{	
+			return instance;
+		}
+	}
+
+	public Connection getCon() {
 		return con;
 	}
 	
