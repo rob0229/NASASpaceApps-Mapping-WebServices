@@ -15,6 +15,7 @@ public class MappingWaterDAOImpl implements MappingWaterDAO{
 	DBConnection con; 
 	PreparedStatement stmt = null;;
 	ResultSet rs = null;
+	int dp_id=0, s_id=0;
 
 	MappingWaterDAOImpl(){
 		
@@ -24,7 +25,7 @@ public class MappingWaterDAOImpl implements MappingWaterDAO{
 	
 	public int addDataPoint(int userId, double latitude, double longitude, String category) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		int dp_id=0, s_id=0;
+		
 		
 		String query ="INSERT INTO DATAPOINT(latitude, longitude, discovery_date, user_id) VALUES ('"+ latitude+"', '"+longitude+"', '"+ sdf.format(new Date()).toString()+ "', '" + userId+"')";
 		try{
@@ -64,14 +65,42 @@ public class MappingWaterDAOImpl implements MappingWaterDAO{
 		return s_id;
 	}
 
-	public void modifyDataPoint(int userID, int dpid, String category) {
+	public int modifyDataPoint(int userID, int dpid, String category) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		//new entry in history and sample table
+		String query = "INSERT INTO SAMPLE(ph) VALUES(0)";
 		
+		try{
+			stmt = con.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+			s_id = stmt.executeUpdate();
+		}catch(Exception e){
+			System.out.println(e);
+		}
 		
+		query="INSERT INTO HISTORY(monitor_date, category, s_id, user_id, dp_id) VALUES('"+sdf.format(new Date()).toString()+"', '"+ category +"', '"+s_id+"'"+dpid+"')";
+		try{
+			stmt = con.getConnection().prepareStatement(query);
+		}catch(Exception e){
+			System.out.println(e);
+		}
+		return s_id;
 	}
 
-	public void recentUserDataPoints(int userID) {
-		// TODO Auto-generated method stub
+	public List<DataPoint> userDataPoints(int userID) {
 		
+		List<DataPoint> list = new ArrayList<DataPoint>();
+		String query = "SELECT * FROM DATAPOINT WHERE user_id = '"+userID+"'";
+		try{
+			stmt = con.getConnection().prepareStatement(query);
+			rs = stmt.executeQuery();
+			while(rs.next()){
+				DataPoint dp = new DataPoint(rs.getInt("dp_id"), rs.getDouble("latitude"), rs.getDouble("longitude"), rs.getNString("discovery_date"), rs.getNString("category"));
+				list.add(dp);
+		}
+		}catch(Exception e){
+				System.out.println(e);
+		}
+		return list;
 	}
 
 	public List<DataPoint> retrieveDataPoints(double maxlatitude, double minlatitude, double maxlongitude, double minlongitude) {
@@ -90,9 +119,4 @@ public class MappingWaterDAOImpl implements MappingWaterDAO{
 		}
 		return list;
 	}
-
-	
-
-	
-
 }

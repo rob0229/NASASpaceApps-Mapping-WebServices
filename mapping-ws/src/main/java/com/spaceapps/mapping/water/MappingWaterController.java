@@ -34,7 +34,7 @@ public class MappingWaterController {
 			@RequestParam(value = "category") String category) {
 
 		try {
-			new MappingWaterService().modifyDataPoint(userID, dpid, category);
+			new MappingWaterDAOImpl().modifyDataPoint(userID, dpid, category);
 		} catch (Exception e) {
 			return "Failure";
 		}
