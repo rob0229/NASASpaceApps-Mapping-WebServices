@@ -1,11 +1,13 @@
 package com.spaceapps.mapping.water;
 
 import java.util.List;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.spaceapps.mapping.object.DataPoint;
+import com.spaceapps.mapping.object.User;
 
 @RestController
 public class MappingWaterController {
@@ -21,21 +23,22 @@ public class MappingWaterController {
 			result = new MappingWaterDAOImpl().registerUser(userName, password, email);
 		} catch (Exception e) {
 			e.printStackTrace();
+			result = "failure";
 		}
 		return result;
 	}
 	
 	@RequestMapping("/mapping/water/login")
-	public String login(
+	public User login(
 			@RequestParam(value = "userName") String userName,
 			@RequestParam(value = "password") String password) {
-		String result = "";
+		User user = null;
 		try {
-			result = new MappingWaterDAOImpl().login(userName, password);
+			user = new MappingWaterDAOImpl().login(userName, password);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return result;
+		return user;
 	}
 	
 	@RequestMapping("/mapping/water/addDataPoint")

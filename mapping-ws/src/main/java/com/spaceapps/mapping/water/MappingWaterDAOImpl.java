@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.spaceapps.mapping.object.DataPoint;
+import com.spaceapps.mapping.object.User;
 
 public class MappingWaterDAOImpl implements MappingWaterDAO{
 	 
@@ -119,19 +120,41 @@ public class MappingWaterDAOImpl implements MappingWaterDAO{
 			list.add(dp);
 		}
 		}catch(Exception e){
-			System.out.println(e);
+			e.printStackTrace();
 		}
 		return list;
 	}
 
-	public String login(String userName, String password) {
+	public User login(String userName, String password) {
+		String query = "SELECT * FROM USERS WHERE password ='"+password+"' and name='"+userName+"'";
+		User u = null;
+		try{
+			stmt = con.getConnection().prepareStatement(query);
+			rs = stmt.executeQuery();
+			u = new User(rs.getInt("user_id"), rs.getString("name"), rs.getString("email"));
+			
+			
+			}catch(Exception e){
+				System.out.println(e);
+			}
 		
 		
-		return "Success!";
+		return u;
 	}
 
 	public String registerUser(String userName, String password, String email) {
-		// TODO Auto-generated method stub
-		return null;
+		String query = "INSERT INTO USERS (password, name, email) VALUES('"+password+"','"+ userName+"','"+email+"')";
+		String result= "";
+		try{
+			stmt = con.getConnection().prepareStatement(query);
+			stmt.executeUpdate();
+			result = "success";
+			}catch(Exception e){
+				System.out.println(e);
+				result = "failure";
+			}
+		
+		
+		return result;
 	}
 }
