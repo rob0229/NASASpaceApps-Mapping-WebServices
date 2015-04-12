@@ -123,4 +123,15 @@ public class MappingWaterDAOImpl implements MappingWaterDAO{
 		}
 		return list;
 	}
+
+	public String login(String userName, String password) {
+		
+		
+		return "Success!";
+	}
+
+	public String registerUser(String userName, String password, String email) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

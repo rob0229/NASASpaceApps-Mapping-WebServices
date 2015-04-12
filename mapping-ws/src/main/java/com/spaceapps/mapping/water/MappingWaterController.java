@@ -13,6 +13,34 @@ import com.spaceapps.mapping.object.DataPoint;
 @RestController
 public class MappingWaterController {
 
+	
+	@RequestMapping("/mapping/water/register")
+	public String registerUser(			
+			@RequestParam(value = "userName") String userName,
+			@RequestParam(value = "password") String password,
+			@RequestParam(value = "eamil") String email) {
+		String result = "";
+		try {
+			result = new MappingWaterDAOImpl().registerUser(userName, password, email);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	@RequestMapping("/mapping/water/login")
+	public String login(
+			@RequestParam(value = "userName") String userName,
+			@RequestParam(value = "password") String password) {
+		String result = "";
+		try {
+			result = new MappingWaterDAOImpl().login(userName, password);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
 	@RequestMapping("/mapping/water/addDataPoint")
 	public int addDataPoint(@RequestParam(value = "userID") int userID,
 			@RequestParam(value = "latitude") double latitude,
@@ -69,4 +97,5 @@ public class MappingWaterController {
 		}
 		return list;
 	}
+	
 }
