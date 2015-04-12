@@ -20,37 +20,38 @@ public class MappingWaterController {
 			@RequestParam(value = "category") String category) {
 		int result = 0;
 		try {
-			result = new MappingWaterDAOImpl().addDataPoint(userID, latitude, longitude,
-					category);
+			result = new MappingWaterDAOImpl().addDataPoint(userID, latitude,
+					longitude, category);
 		} catch (Exception e) {
-			
+
 		}
 		return result;
 	}
 
 	@RequestMapping("/mapping/water/modifyDataPoint")
-	public String addDataPoint(@RequestParam(value = "userID") int userID,
-			@RequestParam(value = "dpid") int dpid,
+	public int modifyDataPoint(@RequestParam(value = "userID") int userID,
+			@RequestParam(value = "dpid") int dp_id,
 			@RequestParam(value = "category") String category) {
-
+		int s_id = 0;
 		try {
-			new MappingWaterDAOImpl().modifyDataPoint(userID, dpid, category);
+			s_id = new MappingWaterDAOImpl().modifyDataPoint(userID, dp_id,
+					category);
 		} catch (Exception e) {
-			return "Failure";
+			e.printStackTrace();
 		}
-		return "Success";
+		return s_id;
 	}
 
-	@RequestMapping("/mapping/water/recentUserDataPoints")
-	public String recentUserDataPoints(
+	@RequestMapping("/mapping/water/userDataPoints")
+	public List<DataPoint> userDataPoints(
 			@RequestParam(value = "userID") int userID) {
-
+		List<DataPoint> list = null;
 		try {
-			new MappingWaterService().recentUserDataPoints(userID);
+			list = new MappingWaterDAOImpl().userDataPoints(userID);
 		} catch (Exception e) {
-			return "Failure";
+			e.printStackTrace();
 		}
-		return "Success";
+		return list;
 	}
 
 	@RequestMapping("/mapping/water/retrieveDataPoints")
@@ -61,8 +62,8 @@ public class MappingWaterController {
 			@RequestParam(value = "minlongitude") double minlongitude) {
 		List<DataPoint> list = null;
 		try {
-			list = new MappingWaterDAOImpl().retrieveDataPoints(maxlatitude, minlatitude, maxlongitude,
-					 minlongitude);
+			list = new MappingWaterDAOImpl().retrieveDataPoints(maxlatitude,
+					minlatitude, maxlongitude, minlongitude);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
