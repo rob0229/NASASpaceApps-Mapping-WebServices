@@ -65,10 +65,10 @@ public class MappingWaterDAOImpl implements MappingWaterDAO{
 		return s_id;
 	}
 
-	public int modifyDataPoint(int userID, int dpid, String category) {
+	public int modifyDataPoint(int userID, int dp_id, String category) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		//new entry in history and sample table
-		String query = "INSERT INTO SAMPLE(ph) VALUES(0)";
+		String query = "INSERT INTO SAMPLE_INFO(ph) VALUES('0')";
 		
 		try{
 			stmt = con.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
@@ -77,9 +77,22 @@ public class MappingWaterDAOImpl implements MappingWaterDAO{
 			System.out.println(e);
 		}
 		
-		query="INSERT INTO HISTORY(monitor_date, category, s_id, user_id, dp_id) VALUES('"+sdf.format(new Date()).toString()+"', '"+ category +"', '"+s_id+"'"+dpid+"')";
+		query ="INSERT INTO SAMPLE_INFO(ph) VALUES ('0')";
+		try{
+			stmt = con.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+			stmt.executeUpdate();
+			rs = stmt.getGeneratedKeys();
+			while(rs.next()){
+				s_id=rs.getInt(1);
+			}
+		}catch(Exception e){
+			System.out.println(e);
+		}
+		
+		query="INSERT INTO HISTORY(monitor_date, category, s_id, user_id, dp_id) VALUES('"+sdf.format(new Date()).toString()+"', '"+ category +"', '"+s_id+"', '"+userID+"', '"+dp_id+"')";
 		try{
 			stmt = con.getConnection().prepareStatement(query);
+			stmt.executeUpdate();
 		}catch(Exception e){
 			System.out.println(e);
 		}
@@ -89,7 +102,7 @@ public class MappingWaterDAOImpl implements MappingWaterDAO{
 	public List<DataPoint> userDataPoints(int userID) {
 		
 		List<DataPoint> list = new ArrayList<DataPoint>();
-		String query = "SELECT * FROM DATAPOINT WHERE user_id = '"+userID+"'";
+		String query = "SELECT * FROM DATAPOINT DP, HISTORY H WHERE DP.dp_id = h.dp_id AND DP.user_id = H.user_id AND DP.user_id = '"+userID+"'";
 		try{
 			stmt = con.getConnection().prepareStatement(query);
 			rs = stmt.executeQuery();
