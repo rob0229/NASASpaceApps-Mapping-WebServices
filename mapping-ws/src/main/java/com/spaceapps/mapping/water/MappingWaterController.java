@@ -12,6 +12,13 @@ import com.spaceapps.mapping.object.User;
 @RestController
 public class MappingWaterController {
 
+	@RequestMapping("/test")
+	public String test(	) {
+		
+		
+		return "The test is successful";
+	} 
+	
 	
 	@RequestMapping("/mapping/water/register")
 	public String registerUser(			
