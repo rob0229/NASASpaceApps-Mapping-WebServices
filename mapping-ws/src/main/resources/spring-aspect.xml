@@ -1,0 +1,22 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd ">
+ 
+	<aop:aspectj-autoproxy />
+ 
+	
+ 
+	<!-- Aspect -->
+	<bean id="logAspectTest" class="com.spaceapps.mapping.aspect.LoggingAspectTest" />
+	<bean id="logAspectRegister" class="com.spaceapps.mapping.aspect.LoggingAspectRegister" />
+	<bean id="logAspectLogin" class="com.spaceapps.mapping.aspect.LoggingAspectLogin" />
+	<bean id="logAspectRetrieve" class="com.spaceapps.mapping.aspect.LoggingAspectRetrieve" />
+	<bean id="logAspectModify" class="com.spaceapps.mapping.aspect.LoggingAspectModify" />
+	<bean id="logAspectAdd" class="com.spaceapps.mapping.aspect.LoggingAspectAdd" />
+	<bean id="logAspectUser" class="com.spaceapps.mapping.aspect.LoggingAspectUserDataPoints" />
+ 
+</beans>

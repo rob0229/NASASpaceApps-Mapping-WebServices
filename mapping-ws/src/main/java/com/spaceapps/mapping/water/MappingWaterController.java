@@ -14,8 +14,7 @@ public class MappingWaterController {
 
 	@RequestMapping("/test")
 	public String test(	) {
-		
-		
+			
 		return "The test is successful";
 	} 
 	
