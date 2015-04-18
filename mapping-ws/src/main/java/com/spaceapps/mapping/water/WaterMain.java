@@ -8,7 +8,7 @@ import org.springframework.context.annotation.ImportResource;
 
 
 @Configuration
-@ImportResource("spring-aspect.xml")
+@ImportResource("/WEB-INF/classes/spring-aspect.xml")
 @SpringBootApplication
 public class WaterMain extends SpringBootServletInitializer{
 	

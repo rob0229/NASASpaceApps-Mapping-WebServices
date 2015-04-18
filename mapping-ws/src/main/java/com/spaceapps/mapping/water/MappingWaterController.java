@@ -2,6 +2,7 @@ package com.spaceapps.mapping.water;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,11 +12,14 @@ import com.spaceapps.mapping.object.User;
 
 @RestController
 public class MappingWaterController {
-
+	@Autowired
+	DAOFactory daoFactory;
+	
+	
+	
 	@RequestMapping("/test")
 	public String test(	) {
-			
-		return "The test is successful";
+			return "The test is successful";
 	} 
 	
 	
@@ -26,8 +30,10 @@ public class MappingWaterController {
 			@RequestParam(value = "eamil") String email) {
 		String result = "";
 		try {
-			MappingWaterDAO dao = new MappingWaterDAOImpl();
-			result = dao.registerUser(userName, password, email);
+			daoFactory.beginConnectionFactory();
+			UserDAO dao = daoFactory.createUserDAO();
+			result = dao.registerUser(userName, password, email, daoFactory.getInstance().getCon());
+			daoFactory.closeConnectionFactory();
 		} catch (Exception e) {
 			e.printStackTrace();
 			result = "failure";
@@ -41,8 +47,10 @@ public class MappingWaterController {
 			@RequestParam(value = "password") String password) {
 		User user = null;
 		try {
-			MappingWaterDAO dao = new MappingWaterDAOImpl();
-			user = dao.login(userName, password);
+			daoFactory.beginConnectionFactory();
+			UserDAO dao = daoFactory.createUserDAO();
+			user = dao.login(userName, password, daoFactory.getInstance().getCon());
+			daoFactory.closeConnectionFactory();
 		
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -58,8 +66,10 @@ public class MappingWaterController {
 			@RequestParam(value = "purpose") String purpose) {
 		int result = 0;
 		try {
-			MappingWaterDAO dao = new MappingWaterDAOImpl();
-			result = dao.addDataPoint(userID, latitude,longitude, category, purpose);
+			daoFactory.beginConnectionFactory();
+			DataPointDAO dao = daoFactory.createDataPointDAO();
+			result = dao.addDataPoint(userID, latitude,longitude, category, purpose, daoFactory.getInstance().getCon());
+			daoFactory.closeConnectionFactory();
 		} catch (Exception e) {
 
 		}
@@ -73,8 +83,10 @@ public class MappingWaterController {
 			@RequestParam(value = "purpose") String purpose) {
 		int s_id = 0;
 		try {
-			MappingWaterDAO dao = new MappingWaterDAOImpl();
-			s_id = dao.modifyDataPoint(userID, dp_id,category, purpose);
+			daoFactory.beginConnectionFactory();
+			DataPointDAO dao =  daoFactory.createDataPointDAO();
+			s_id = dao.modifyDataPoint(userID, dp_id,category, purpose, daoFactory.getInstance().getCon());
+			daoFactory.closeConnectionFactory();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -86,8 +98,10 @@ public class MappingWaterController {
 			@RequestParam(value = "userID") int userID) {
 		List<DataPoint> list = null;
 		try {
-			MappingWaterDAO dao = new MappingWaterDAOImpl();
-			list = dao.userDataPoints(userID);
+			daoFactory.beginConnectionFactory();
+			DataPointDAO dao = daoFactory.createDataPointDAO();
+			list = dao.userDataPoints(userID, daoFactory.getInstance().getCon());
+			daoFactory.closeConnectionFactory();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -102,8 +116,10 @@ public class MappingWaterController {
 			@RequestParam(value = "minlongitude") double minlongitude) {
 		List<DataPoint> list = null;
 		try {
-			MappingWaterDAO dao = new MappingWaterDAOImpl();
-			list = dao.retrieveDataPoints(maxlatitude,minlatitude, maxlongitude, minlongitude);
+			daoFactory.beginConnectionFactory();
+			DataPointDAO dao = daoFactory.createDataPointDAO();
+			list = dao.retrieveDataPoints(maxlatitude,minlatitude, maxlongitude, minlongitude, daoFactory.getInstance().getCon());
+			daoFactory.closeConnectionFactory();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
