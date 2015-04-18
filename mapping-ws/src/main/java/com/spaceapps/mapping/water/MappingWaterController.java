@@ -26,7 +26,8 @@ public class MappingWaterController {
 			@RequestParam(value = "eamil") String email) {
 		String result = "";
 		try {
-			result = new MappingWaterDAOImpl().registerUser(userName, password, email);
+			MappingWaterDAO dao = new MappingWaterDAOImpl();
+			result = dao.registerUser(userName, password, email);
 		} catch (Exception e) {
 			e.printStackTrace();
 			result = "failure";
@@ -40,7 +41,9 @@ public class MappingWaterController {
 			@RequestParam(value = "password") String password) {
 		User user = null;
 		try {
-			user = new MappingWaterDAOImpl().login(userName, password);
+			MappingWaterDAO dao = new MappingWaterDAOImpl();
+			user = dao.login(userName, password);
+		
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -55,8 +58,8 @@ public class MappingWaterController {
 			@RequestParam(value = "purpose") String purpose) {
 		int result = 0;
 		try {
-			result = new MappingWaterDAOImpl().addDataPoint(userID, latitude,
-					longitude, category, purpose);
+			MappingWaterDAO dao = new MappingWaterDAOImpl();
+			result = dao.addDataPoint(userID, latitude,longitude, category, purpose);
 		} catch (Exception e) {
 
 		}
@@ -70,8 +73,8 @@ public class MappingWaterController {
 			@RequestParam(value = "purpose") String purpose) {
 		int s_id = 0;
 		try {
-			s_id = new MappingWaterDAOImpl().modifyDataPoint(userID, dp_id,
-					category, purpose);
+			MappingWaterDAO dao = new MappingWaterDAOImpl();
+			s_id = dao.modifyDataPoint(userID, dp_id,category, purpose);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -83,7 +86,8 @@ public class MappingWaterController {
 			@RequestParam(value = "userID") int userID) {
 		List<DataPoint> list = null;
 		try {
-			list = new MappingWaterDAOImpl().userDataPoints(userID);
+			MappingWaterDAO dao = new MappingWaterDAOImpl();
+			list = dao.userDataPoints(userID);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -98,8 +102,8 @@ public class MappingWaterController {
 			@RequestParam(value = "minlongitude") double minlongitude) {
 		List<DataPoint> list = null;
 		try {
-			list = new MappingWaterDAOImpl().retrieveDataPoints(maxlatitude,
-					minlatitude, maxlongitude, minlongitude);
+			MappingWaterDAO dao = new MappingWaterDAOImpl();
+			list = dao.retrieveDataPoints(maxlatitude,minlatitude, maxlongitude, minlongitude);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
