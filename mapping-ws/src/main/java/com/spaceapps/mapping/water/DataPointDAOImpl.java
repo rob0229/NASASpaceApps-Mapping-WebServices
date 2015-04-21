@@ -129,7 +129,7 @@ public class DataPointDAOImpl implements DataPointDAO {
 	public List<DataPoint> userDataPoints(int userID, Connection con) {
 
 		List<DataPoint> list = new ArrayList<DataPoint>();
-		String query = "SELECT * FROM DATAPOINT DP, HISTORY H WHERE DP.dp_id = h.dp_id AND DP.user_id = H.user_id AND DP.user_id = '"
+		String query = "SELECT * FROM DATAPOINT DP, HISTORY H WHERE DP.dp_id = H.dp_id AND DP.user_id = H.user_id AND DP.user_id = '"
 				+ userID + "'";
 		try {
 			stmt = con.prepareStatement(query);
@@ -152,7 +152,7 @@ public class DataPointDAOImpl implements DataPointDAO {
 			double minlatitude, double maxlongitude, double minlongitude, Connection con) {
 
 		List<DataPoint> list = new ArrayList<DataPoint>();
-		String query = "SELECT * FROM DATAPOINT DP, HISTORY H WHERE DP.dp_id = h.dp_id AND DP.user_id = H.user_id AND latitude >"
+		String query = "SELECT * FROM DATAPOINT DP, HISTORY H WHERE DP.dp_id = H.dp_id AND DP.user_id = H.user_id AND latitude >"
 				+ minlatitude
 				+ " AND latitude < "
 				+ maxlatitude
@@ -167,7 +167,7 @@ public class DataPointDAOImpl implements DataPointDAO {
 				DataPoint dp = new DataPoint(rs.getInt("dp_id"),
 						rs.getDouble("latitude"), rs.getDouble("longitude"),
 						rs.getNString("discovery_date"),
-						rs.getNString("category"), rs.getNString("purpose"));
+						rs.getNString("category"), rs.getNString("purpose"));  
 				list.add(dp);
 			}
 		} catch (Exception e) {

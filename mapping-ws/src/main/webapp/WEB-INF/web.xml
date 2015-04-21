@@ -12,34 +12,34 @@
 		<servlet-name>controller</servlet-name>
 		<servlet-class>com.spaceapps.mapping.water.MappingWaterController</servlet-class>
 		<init-param>
-			<param-name>/mapping/water/addDataPoint</param-name>
-			<param-value>com.spaceapps.mapping.water.MappingWaterController</param-value>
-		</init-param>
-		<init-param>
 			<param-name>test</param-name>
 			<param-value>com.spaceapps.mapping.water.MappingWaterController</param-value>
 		</init-param>
+		<init-param>
+			<param-name>mapping/water/addDataPoint</param-name>
+			<param-value>com.spaceapps.mapping.water.MappingWaterController</param-value>
+		</init-param>
+		<init-param>
+			<param-name>mapping/water/register</param-name>
+			<param-value>com.spaceapps.mapping.water.MappingWaterController</param-value>
+		</init-param>
+		<init-param>
+			<param-name>mapping/water/login</param-name>
+			<param-value>com.spaceapps.mapping.water.MappingWaterController</param-value>
+		</init-param>
+		<init-param>
+			<param-name>mapping/water/userDataPoints</param-name>
+			<param-value>com.spaceapps.mapping.water.MappingWaterController</param-value>
+		</init-param>
+		<init-param>
+			<param-name>mapping/water/retrieveDataPoints</param-name>
+			<param-value>com.spaceapps.mapping.water.MappingWaterController</param-value>
+		</init-param>
+		<init-param>
+			<param-name>mapping/water/modifyDataPoint</param-name>
+			<param-value>com.spaceapps.mapping.water.MappingWaterController</param-value>
+		</init-param>
 
-		<init-param>
-			<param-name>/mapping/water/register</param-name>
-			<param-value>com.spaceapps.mapping.water.MappingWaterController</param-value>
-		</init-param>
-		<init-param>
-			<param-name>/mapping/water/login</param-name>
-			<param-value>com.spaceapps.mapping.water.MappingWaterController</param-value>
-		</init-param>
-		<init-param>
-			<param-name>/mapping/water/userDataPoints</param-name>
-			<param-value>com.spaceapps.mapping.water.MappingWaterController</param-value>
-		</init-param>
-		<init-param>
-			<param-name>/mapping/water/retrieveDataPoints</param-name>
-			<param-value>com.spaceapps.mapping.water.MappingWaterController</param-value>
-		</init-param>
-		<init-param>
-			<param-name>/mapping/water/modifyDataPoint</param-name>
-			<param-value>com.spaceapps.mapping.water.MappingWaterController</param-value>
-		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 

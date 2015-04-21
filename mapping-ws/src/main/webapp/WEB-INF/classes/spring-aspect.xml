@@ -18,9 +18,7 @@
 	<bean id="logAspectModify" class="com.spaceapps.mapping.aspect.LoggingAspectModify" />
 	<bean id="logAspectAdd" class="com.spaceapps.mapping.aspect.LoggingAspectAdd" />
 	<bean id="logAspectUser" class="com.spaceapps.mapping.aspect.LoggingAspectUserDataPoints" />
- 
- 
- 
+
  	<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
  	<bean class="com.spaceapps.mapping.water.DAOFactory"/>
 </beans>

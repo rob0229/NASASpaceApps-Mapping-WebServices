@@ -15,8 +15,6 @@ public class MappingWaterController {
 	@Autowired
 	DAOFactory daoFactory;
 	
-	
-	
 	@RequestMapping("/test")
 	public String test(	) {
 			return "The test is successful";
@@ -27,7 +25,7 @@ public class MappingWaterController {
 	public String registerUser(			
 			@RequestParam(value = "userName") String userName,
 			@RequestParam(value = "password") String password,
-			@RequestParam(value = "eamil") String email) {
+			@RequestParam(value = "email") String email) {
 		String result = "";
 		try {
 			daoFactory.beginConnectionFactory();
