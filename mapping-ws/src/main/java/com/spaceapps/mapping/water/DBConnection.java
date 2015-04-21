@@ -10,8 +10,6 @@ public class DBConnection {
 
 	private static Connection con;
 	private static DBConnection instance = null;
-	private String dbUsername;
-	private String dbPassword;
 	private String dbServer;
 	private String dbPort;
 	private String dbName;
@@ -25,15 +23,13 @@ public class DBConnection {
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
-		
-		dbUsername = props.getProperty("dbusername");
-		dbPassword = props.getProperty("dbpassword");
 		dbServer = props.getProperty("dbserver");
 		dbPort = props.getProperty("dbport");
 		dbName = props.getProperty("dbname");
+		String url = "jdbc:mysql://" + dbServer + ":" + dbPort + "/" + dbName;
 		
 		try{
-			this.con = DriverManager.getConnection("jdbc:mysql://" + dbServer + ":" + dbPort + "/" + dbName, dbUsername, dbPassword);
+			this.con = DriverManager.getConnection(url, props);
 		}catch(Exception e){
 			System.out.println("Result is: "+ e);
 		}

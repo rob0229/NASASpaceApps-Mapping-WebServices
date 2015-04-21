@@ -137,8 +137,8 @@ public class DataPointDAOImpl implements DataPointDAO {
 			while (rs.next()) {
 				DataPoint dp = new DataPoint(rs.getInt("dp_id"),
 						rs.getDouble("latitude"), rs.getDouble("longitude"),
-						rs.getNString("discovery_date"),
-						rs.getNString("category"), rs.getNString("purpose"));
+						rs.getString("discovery_date"),
+						rs.getString("category"), rs.getString("purpose"));
 				list.add(dp);
 			}
 		} catch (Exception e) {
@@ -166,8 +166,8 @@ public class DataPointDAOImpl implements DataPointDAO {
 			while (rs.next()) {
 				DataPoint dp = new DataPoint(rs.getInt("dp_id"),
 						rs.getDouble("latitude"), rs.getDouble("longitude"),
-						rs.getNString("discovery_date"),
-						rs.getNString("category"), rs.getNString("purpose"));  
+						rs.getString("discovery_date"),
+						rs.getString("category"), rs.getString("purpose"));  
 				list.add(dp);
 			}
 		} catch (Exception e) {
